@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Retr0 Active | Vintage gear, modern pace</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="announcement-bar">
+    <p>A little vintage spirit. A lot of get-up-and-go.</p>
+  </div>
+
+  <header id="top" class="site-header">
+    <a class="brand" href="#top" aria-label="Retr0 Active home">
+      <span class="brand__mark" aria-hidden="true">R</span>
+      <span class="brand__name">Retr<span>0</span> Active</span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#products">Shop all</a>
+      <a href="#add-product">Add a product</a>
+    </nav>
+    <a class="header-cta" href="#products">
+      Explore the collection <span aria-hidden="true">&rarr;</span>
+    </a>
+    <button
+      id="cart-toggle"
+      class="cart-toggle"
+      type="button"
+      aria-haspopup="dialog"
+      aria-controls="cart-dialog"
+      aria-label="Open shopping cart, 0 items">
+      Cart <span id="cart-count" class="cart-count">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero__copy">
+        <p class="eyebrow">Made for moving through life</p>
+        <h1 id="hero-heading">Find your<br>kind of <span>active.</span></h1>
+        <p class="hero__description">
+          Feel-good essentials with a little old-school soul. Find the pieces
+          that make every day your own.
+        </p>
+        <a class="hero__button" href="#products">
+          Shop the collection <span aria-hidden="true">&rarr;</span>
+        </a>
+        <div class="hero__note">
+          <span class="hero__note-mark" aria-hidden="true">+</span>
+          <p>Apparel, hydration &amp; everyday wellness</p>
+        </div>
+      </div>
+      <div class="hero__image-wrap">
+        <img
+          class="hero__image"
+          src="images/Grunge Skater Jeans (Men) - AWMGSJ.jpg"
+          alt="Vintage-inspired grunge skater jeans">
+        <div class="hero__image-caption">
+          <span>THE EVERYDAY EDIT</span>
+          <span>A little different. All you.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="products-section" aria-labelledby="products-heading">
+      <div class="section-heading">
+        <div class="section-heading__copy">
+          <p class="eyebrow">The collection</p>
+          <h2 id="products-heading">Good things to get moving in.</h2>
+          <p class="section-heading__description">
+            Gear and good-for-you essentials, picked for your everyday.
+          </p>
+        </div>
+        <button id="refresh-button" class="secondary-button" type="button" aria-label="Refresh the collection">
+          <span aria-hidden="true">&circlearrowright;</span> Refresh
+        </button>
+      </div>
+      <div class="product-filters">
+        <label class="product-search">
+          <span>Search products</span>
+          <input
+            id="product-search"
+            type="search"
+            placeholder="Search by name, SKU, or description"
+            autocomplete="off"
+            aria-controls="products">
+        </label>
+        <label class="category-filter">
+          <span>Filter by category</span>
+          <select id="category-filter" aria-controls="products" disabled>
+            <option value="all">All categories</option>
+          </select>
+        </label>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+      <div id="products" class="products-grid"></div>
+    </section>
+
+    <section id="add-product" class="panel add-product-section" aria-labelledby="product-form-heading">
+      <div class="add-product-heading">
+        <p class="eyebrow">Grow the collection</p>
+        <h2 id="product-form-heading">Got something good?</h2>
+        <p>Add a product and help someone find their next favorite.</p>
+      </div>
+      <form id="product-form" class="product-form" novalidate>
+        <label>
+          SKU
+          <input name="sku" required maxlength="40" aria-describedby="add-sku-error">
+          <span id="add-sku-error" class="field-error" data-validation-for="sku" aria-live="polite"></span>
+        </label>
+        <label>
+          Name
+          <input name="name" required maxlength="120" aria-describedby="add-name-error">
+          <span id="add-name-error" class="field-error" data-validation-for="name" aria-live="polite"></span>
+        </label>
+        <label class="image-url-field">
+          Image URL
+          <input
+            name="imageUrl"
+            type="text"
+            inputmode="url"
+            placeholder="images/apparel.svg or https://…"
+            maxlength="2048"
+            aria-describedby="add-imageUrl-error">
+          <span id="add-imageUrl-error" class="field-error" data-validation-for="imageUrl" aria-live="polite"></span>
+        </label>
+        <label class="image-file-field">
+          Choose an image from your device
+          <input
+            name="imageFile"
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            aria-describedby="add-imageFile-help add-imageFile-error">
+          <span id="add-imageFile-help" class="field-help">JPG, PNG, GIF, or WebP; up to 1 MB.</span>
+          <span id="add-imageFile-error" class="field-error" data-validation-for="imageFile" aria-live="polite"></span>
+        </label>
+        <div class="image-file-preview wide" data-image-preview hidden>
+          <img data-image-preview-image alt="">
+          <span data-image-preview-name></span>
+        </div>
+        <label class="wide">
+          Description
+          <input name="description" required maxlength="300" aria-describedby="add-description-error">
+          <span id="add-description-error" class="field-error" data-validation-for="description" aria-live="polite"></span>
+        </label>
+        <fieldset class="option-editor wide">
+          <legend>Sizes / options and prices</legend>
+          <p class="field-help">Add each available size or option with its price.</p>
+          <div class="option-list" data-option-list aria-label="Product options"></div>
+          <div class="option-editor__actions">
+            <button class="secondary-button" type="button" data-add-option>Add size or option</button>
+          </div>
+          <span id="add-options-error" class="field-error" data-validation-for="options" aria-live="polite"></span>
+        </fieldset>
+        <label>
+          Category
+          <select name="categoryId" required aria-describedby="add-categoryId-error" disabled></select>
+          <span id="add-categoryId-error" class="field-error" data-validation-for="categoryId" aria-live="polite"></span>
+        </label>
+        <label class="availability">
+          <input name="isAvailable" type="checkbox" checked>
+          Available
+        </label>
+        <div class="form-actions">
+          <button type="submit">Add product</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <a class="brand" href="#top" aria-label="Retr0 Active home">
+        <span class="brand__mark" aria-hidden="true">R</span>
+        <span class="brand__name">Retr<span>0</span> Active</span>
+      </a>
+      <p>Retro roots. Full speed ahead.</p>
+      <a class="footer-link" href="#top">Back to top &uarr;</a>
+    </div>
+  </footer>
+
+  <dialog id="edit-product-dialog" aria-labelledby="edit-product-heading">
+    <section class="panel edit-product-panel">
+      <div class="edit-product-header">
+        <h2 id="edit-product-heading">Edit product</h2>
+        <button id="cancel-edit-button" class="secondary-button" type="button">
+          Cancel
+        </button>
+      </div>
+      <form id="edit-product-form" class="product-form" novalidate>
+        <label>
+          SKU
+          <input name="sku" required maxlength="40" aria-describedby="edit-sku-error">
+          <span id="edit-sku-error" class="field-error" data-validation-for="sku" aria-live="polite"></span>
+        </label>
+        <label>
+          Name
+          <input name="name" required maxlength="120" aria-describedby="edit-name-error">
+          <span id="edit-name-error" class="field-error" data-validation-for="name" aria-live="polite"></span>
+        </label>
+        <label class="image-url-field">
+          Image URL
+          <input
+            name="imageUrl"
+            type="text"
+            inputmode="url"
+            placeholder="images/apparel.svg or https://…"
+            maxlength="2048"
+            aria-describedby="edit-imageUrl-error">
+          <span id="edit-imageUrl-error" class="field-error" data-validation-for="imageUrl" aria-live="polite"></span>
+        </label>
+        <label class="image-file-field">
+          Choose an image from your device
+          <input
+            name="imageFile"
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            aria-describedby="edit-imageFile-help edit-imageFile-error">
+          <span id="edit-imageFile-help" class="field-help">JPG, PNG, GIF, or WebP; up to 1 MB.</span>
+          <span id="edit-imageFile-error" class="field-error" data-validation-for="imageFile" aria-live="polite"></span>
+        </label>
+        <div class="image-file-preview wide" data-image-preview hidden>
+          <img data-image-preview-image alt="">
+          <span data-image-preview-name></span>
+        </div>
+        <label class="wide">
+          Description
+          <input name="description" required maxlength="300" aria-describedby="edit-description-error">
+          <span id="edit-description-error" class="field-error" data-validation-for="description" aria-live="polite"></span>
+        </label>
+        <fieldset class="option-editor wide">
+          <legend>Sizes / options and prices</legend>
+          <p class="field-help">Add each available size or option with its price.</p>
+          <div class="option-list" data-option-list aria-label="Product options"></div>
+          <div class="option-editor__actions">
+            <button class="secondary-button" type="button" data-add-option>Add size or option</button>
+          </div>
+          <span id="edit-options-error" class="field-error" data-validation-for="options" aria-live="polite"></span>
+        </fieldset>
+        <label>
+          Category
+          <select name="categoryId" required aria-describedby="edit-categoryId-error" disabled></select>
+          <span id="edit-categoryId-error" class="field-error" data-validation-for="categoryId" aria-live="polite"></span>
+        </label>
+        <label class="availability">
+          <input name="isAvailable" type="checkbox">
+          Available
+        </label>
+        <div class="form-actions">
+          <button type="submit">Save changes</button>
+        </div>
+      </form>
+    </section>
+  </dialog>
+
+  <dialog id="product-detail-dialog" class="product-detail-dialog" aria-labelledby="product-detail-heading">
+    <section class="product-detail-panel">
+      <button id="close-product-detail" class="dialog-close" type="button" aria-label="Close product details">Close</button>
+      <div class="product-detail-layout">
+        <img class="product-detail-image" data-product-detail-image alt="">
+        <div class="product-detail-copy">
+          <p class="eyebrow" data-product-detail-category></p>
+          <h2 id="product-detail-heading" data-product-detail-name></h2>
+          <p class="product-detail-sku" data-product-detail-sku></p>
+          <p class="product-detail-description" data-product-detail-description></p>
+          <p class="product-detail-price" data-product-detail-price></p>
+          <p class="product-detail-stock" data-product-detail-stock></p>
+          <form id="product-detail-form" class="product-detail-form">
+            <label>
+              Size / option
+              <select id="product-option-select" required></select>
+            </label>
+            <label>
+              Quantity
+              <input id="product-quantity" type="number" min="1" step="1" value="1" required>
+            </label>
+            <button id="add-to-cart-button" type="submit">Add to cart</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </dialog>
+
+  <dialog id="cart-dialog" class="cart-dialog" aria-labelledby="cart-heading">
+    <section class="cart-panel">
+      <header class="cart-panel__header">
+        <h2 id="cart-heading">Your cart</h2>
+        <button id="close-cart" class="secondary-button" type="button">Close</button>
+      </header>
+      <p id="cart-empty" class="cart-empty" hidden>Your cart is empty. Choose something you love.</p>
+      <div id="cart-items" class="cart-items" aria-live="polite"></div>
+      <div class="cart-summary">
+        <div><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+        <p>Checkout is not available in this demo.</p>
+      </div>
+    </section>
+  </dialog>
+</body>
+</html>
