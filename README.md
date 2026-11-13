@@ -1,4 +1,4 @@
-# H+ Sport API and Client Student Starter
+# Retr0 Active
 
 This folder is a clean, self-contained starting point for building a client that
 uses the H+ Sport ASP.NET Core API. The dated lesson folders in the project root
